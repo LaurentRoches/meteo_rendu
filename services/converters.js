@@ -6,7 +6,10 @@ export const kmToMiles = (km) => (km / 1.609).toFixed(1);
 
 export const timeTo12HourFormat = (time) => {
   let [hours, minutes] = time.split(":");
-  return `${(hours %= 12) ? hours : 12}:${minutes}`;
+  hours = parseInt(hours, 10);
+  const period = hours >= 12 ? "PM" : "AM";
+  hours = hours % 12 || 12;
+  return `${hours}:${minutes} ${period}`;
 };
 
 export const degToCompass = (num) => {
@@ -33,9 +36,14 @@ export const degToCompass = (num) => {
 };
 
 export const unixToLocalTime = (unixSeconds, timezone) => {
-  let time = new Date((unixSeconds + timezone) * 1000)
-    .toISOString()
-    .match(/(\d{2}:\d{2})/)[0];
-
-  return time.startsWith("0") ? time.substring(1) : time;
+  if (!unixSeconds || !timezone) {
+    return "Invalid time";
+  }
+  try {
+    const utcSeconds = unixSeconds + timezone;
+    const localDate = new Date(utcSeconds * 1000);
+    return localDate.toISOString().match(/(\d{2}:\d{2})/)[0];
+  } catch (error) {
+    return "Invalid time";
+  }
 };
