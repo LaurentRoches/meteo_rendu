@@ -9,7 +9,7 @@ import { MetricsCard } from "./MetricsCard";
 import styles from "./MetricsBox.module.css";
 
 export const MetricsBox = ({ weatherData, unitSystem }) => {
-  if (!weatherData || !weatherData.hourly || weatherData.hourly.length === 0) {
+  if (!weatherData || !weatherData.current || weatherData.current.length === 0) {
     return (
       <div className={styles.error}>
         <p>Failed to load weather data.</p>
@@ -17,8 +17,7 @@ export const MetricsBox = ({ weatherData, unitSystem }) => {
     ); 
   }
 
-  const firstHourData = weatherData.hourly.time[0];
-  const dataIndex = weatherData.hourly.time.indexOf(firstHourData);
+  const firstHourData = weatherData.current.time;
 
   return (
     <div className={styles.wrapper}>
@@ -26,28 +25,28 @@ export const MetricsBox = ({ weatherData, unitSystem }) => {
       <MetricsCard
         title={"Temperature"}
         iconSrc={"/icons/temperature.png"}
-        metric={weatherData.hourly.temperature_2m[dataIndex]}
+        metric={weatherData.current.temperature_2m}
         unit={"°C"}
       />
       {/* Humidité relative */}
       <MetricsCard
         title={"Humidity"}
         iconSrc={"/icons/humidity.png"}
-        metric={weatherData.hourly.relative_humidity_2m[dataIndex]}
+        metric={weatherData.current.relative_humidity_2m}
         unit={"%"}
       />
       {/* Vitesse du vent */}
       <MetricsCard
         title={"Wind speed"}
         iconSrc={"/icons/wind.png"}
-        metric={getWindSpeed(unitSystem, weatherData.hourly.wind_speed_10m[dataIndex])}
+        metric={getWindSpeed(unitSystem, weatherData.current.wind_speed_10m)}
         unit={unitSystem === "metric" ? "km/h" : "mph"}
       />
       {/* Direction du vent */}
         <MetricsCard
           title={"Wind direction"}
           iconSrc={"/icons/compass.png"}
-          metric={degToCompass(weatherData.hourly.wind_direction_10m[dataIndex])}
+          metric={degToCompass(weatherData.current.wind_direction_10m)}
         />
       {/* Visibilité, si disponible */}
       {weatherData.visibility && (

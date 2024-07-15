@@ -10,8 +10,8 @@ export const MainCard = ({
   unitSystem,
   weatherData,
 }) => {
-  const temperature = weatherData.temperature;
-  const feelsLike = weatherData.temperature;
+  const temperature = weatherData?.current?.temperature_2m;
+  const feelsLike = weatherData?.current?.apparent_temperature;
 
   return (
     <div className={styles.wrapper}>

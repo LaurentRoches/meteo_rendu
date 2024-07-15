@@ -5,7 +5,7 @@ export default async function handler(req, res) {
 
   try {
     const getWeatherData = await fetch(
-      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,relative_humidity_2m,visibility,wind_speed_10m,wind_direction_10m&daily=sunrise,sunset`
+      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m,wind_direction_10m&daily=sunrise,sunset&timeformat=unixtime&timezone=Europe%2FBerlin&forecast_days=1&models=arome_france`
     );
 
     if (!getWeatherData.ok) {

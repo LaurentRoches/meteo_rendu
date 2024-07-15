@@ -24,23 +24,23 @@ export const degToCompass = (num) => {
     "SE",
     "SSE",
     "S",
-    "SSW",
-    "SW",
-    "WSW",
-    "W",
-    "WNW",
-    "NW",
-    "NNW",
+    "SSO",
+    "SO",
+    "OSO",
+    "O",
+    "ONO",
+    "NO",
+    "NNO",
   ];
   return arr[val % 16];
 };
 
-export const unixToLocalTime = (unixSeconds, timezone) => {
-  if (!unixSeconds || !timezone) {
+export const unixToLocalTime = (unixSeconds, utcOffsetSeconds) => {
+  if (!unixSeconds || utcOffsetSeconds === undefined) {
     return "Invalid time";
   }
   try {
-    const utcSeconds = unixSeconds + timezone;
+    const utcSeconds = unixSeconds + utcOffsetSeconds;
     const localDate = new Date(utcSeconds * 1000);
     return localDate.toISOString().match(/(\d{2}:\d{2})/)[0];
   } catch (error) {

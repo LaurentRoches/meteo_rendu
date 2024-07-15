@@ -13,28 +13,28 @@ export const getVisibility = (unitSystem, visibilityInMeters) =>
     ? (visibilityInMeters / 1000).toFixed(1)
     : kmToMiles(visibilityInMeters / 1000);
 
-    export const getTime = (unitSystem, currentTime, timezone) => {
-      const localTime = unixToLocalTime(currentTime, timezone);
+    export const getTime = (unitSystem, currentTime, utcOffsetSeconds) => {
+      const localTime = unixToLocalTime(currentTime, utcOffsetSeconds);
       return unitSystem === "metric" ? localTime : timeTo12HourFormat(localTime);
     };
 
-    export const getAMPM = (unitSystem, currentTime, timezone) => {
-      const localTime = unixToLocalTime(currentTime, timezone);
+    export const getAMPM = (unitSystem, currentTime, utcOffsetSeconds) => {
+      const localTime = unixToLocalTime(currentTime, utcOffsetSeconds);
       const hour = parseInt(localTime.split(":")[0], 10);
       return unitSystem === "imperial" ? (hour >= 12 ? "PM" : "AM") : "";
     };
 
-    export const getWeekDay = (dateString, timezone) => {
+    export const getWeekDay = (dateString, utcOffsetSeconds) => {
       const date = new Date(dateString);
-      const utcDate = new Date(date.getTime() + timezone * 1000);
+      const utcDate = new Date(date.getTime() + utcOffsetSeconds * 1000);
       const weekday = [
-        "Sunday", 
-        "Monday", 
-        "Tuesday", 
-        "Wednesday", 
-        "Thursday", 
-        "Friday", 
-        "Saturday"
+        "Lundi", 
+        "Mardi", 
+        "Mercredi", 
+        "Jeudi", 
+        "Vendredi", 
+        "Samedi", 
+        "Dimanche"
       ];
       return weekday[utcDate.getUTCDay()];
     };
