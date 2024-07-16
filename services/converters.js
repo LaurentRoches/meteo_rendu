@@ -47,3 +47,60 @@ export const unixToLocalTime = (unixSeconds, utcOffsetSeconds) => {
     return "Invalid time";
   }
 };
+
+export const getDescriptionFromCode = (code) => {
+  const descriptions = {
+    0: "Ciel clair",
+    1: "Principalement clair",
+    2: "Partiellement nuageux",
+    3: "Nuageux",
+    45: "Brouillard",
+    48: "Brouillard givrant",
+    51: "Bruine légère",
+    53: "Bruine modérée",
+    55: "Bruine forte",
+    61: "Pluie légère",
+    63: "Pluie modérée",
+    65: "Pluie forte",
+    67: "Pluie et neige",
+    71: "Chutes de neige légères",
+    73: "Chutes de neige modérées",
+    75: "Chutes de neige fortes",
+    80: "Averses légères",
+    81: "Averses modérées",
+    82: "Averses fortes",
+    95: "Orages légers ou modérés",
+    99: "Orages violents"
+  };
+
+  return descriptions[code] || "Condition météorologique inconnue";
+};
+
+export const getIconName = (weatherCode, isDay) => {
+  const dayOrNight = isDay ? "d" : "n";
+  const weatherIcons = {
+    0: `01${dayOrNight}.svg`,
+    1: `01${dayOrNight}.svg`,
+    2: `02${dayOrNight}.svg`,
+    3: `03${dayOrNight}.svg`,
+    45: `50${dayOrNight}.svg`,
+    48: `50${dayOrNight}.svg`,
+    51: `09${dayOrNight}.svg`,
+    53: `09${dayOrNight}.svg`,
+    55: `09${dayOrNight}.svg`,
+    61: `10${dayOrNight}.svg`,
+    63: `10${dayOrNight}.svg`,
+    65: `10${dayOrNight}.svg`,
+    67: `10${dayOrNight}.svg`,
+    71: `13${dayOrNight}.svg`,
+    73: `13${dayOrNight}.svg`,
+    75: `13${dayOrNight}.svg`,
+    80: `09${dayOrNight}.svg`,
+    81: `09${dayOrNight}.svg`,
+    82: `09${dayOrNight}.svg`,
+    95: `11${dayOrNight}.svg`,
+    99: `11${dayOrNight}.svg`,
+  };
+  const iconName = weatherIcons[weatherCode] || `01${dayOrNight}.svg`;
+  return iconName;
+};

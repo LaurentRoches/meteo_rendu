@@ -1,17 +1,19 @@
 import Image from "next/image";
-import { ctoF } from "../services/converters";
+import { ctoF, getDescriptionFromCode, getIconName} from "../services/converters";
 import styles from "./MainCard.module.css";
 
 export const MainCard = ({
   city,
   country,
-  description,
-  iconName,
+  weatherCode,
+  isDay,
   unitSystem,
   weatherData,
 }) => {
   const temperature = weatherData?.current?.temperature_2m;
   const feelsLike = weatherData?.current?.apparent_temperature;
+  const description = getDescriptionFromCode(weatherCode);
+  const iconName = getIconName(weatherCode, isDay);
 
   return (
     <div className={styles.wrapper}>
@@ -22,7 +24,7 @@ export const MainCard = ({
       <Image
         width="300px"
         height="300px"
-        src={`/icons/${iconName}.svg`}
+        src={`/icons/${iconName}`}
         alt="weatherIcon"
       />
       <h1 className={styles.temperature}>

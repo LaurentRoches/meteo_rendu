@@ -3,7 +3,7 @@ import styles from "./DateAndTime.module.css";
 
 export const DateAndTime = ({ weatherData, unitSystem }) => {
   
-  const formattedTime = `${getTime(unitSystem, weatherData.current.time, weatherData.utc_offset_seconds)} ${getAMPM(unitSystem, weatherData.current.time, weatherData.utc_offset_seconds)}`;
+  const formattedTime = `${getTime(unitSystem, weatherData.current.time, weatherData.utc_offset_seconds)}`;
 
   return (
     <div className={styles.wrapper}>

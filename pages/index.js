@@ -11,6 +11,7 @@ import { LoadingScreen } from "../components/LoadingScreen";
 import { ErrorScreen } from "../components/ErrorScreen";
 
 import styles from "../styles/Home.module.css";
+import { getIconName } from "../services/converters";
 
 export const App = () => {
   const [weatherData, setWeatherData] = useState();
@@ -46,8 +47,8 @@ export const App = () => {
       <MainCard
         city={config.city}
         country={config.country}
-        description="Weather description" 
-        iconName="01d" 
+        weatherCode={weatherData.current.weather_code} 
+        isDay = {weatherData.current.is_day}
         unitSystem={unitSystem}
         weatherData={weatherData}
       />
