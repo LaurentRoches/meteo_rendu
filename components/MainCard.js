@@ -34,7 +34,7 @@ export const MainCard = ({
         °{unitSystem === "metric" ? "C" : "F"}
       </h1>
       <p>
-        Feels like{" "}
+        Ressenti : {" "}
         {unitSystem === "metric"
           ? Math.round(feelsLike)
           : Math.round(ctoF(feelsLike))}
