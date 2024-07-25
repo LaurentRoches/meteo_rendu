@@ -22,8 +22,8 @@ export const MainCard = ({
       </h1>
       <p className={styles.description}>{description}</p>
       <Image
-        width="300px"
-        height="300px"
+        width="300"
+        height="300"
         src={`/icons/${iconName}`}
         alt="weatherIcon"
       />
